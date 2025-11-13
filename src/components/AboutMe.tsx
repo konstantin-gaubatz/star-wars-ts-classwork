@@ -7,10 +7,11 @@ import {SWContext} from "../utils/context.ts";
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
     const {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext);
+    const {changeHero, setIsError} = useContext(SWContext);
 
     useEffect(() => {
         if(!(heroId in characters)){
+            setIsError(true);
             return;
         }
         changeHero(heroId);

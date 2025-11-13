@@ -8,14 +8,15 @@ import {useParams} from "react-router";
 
 const Home = () => {
     const {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext);
+    const {changeHero, setIsError} = useContext(SWContext);
 
     useEffect(() => {
         if (!(heroId in characters)) {
+            setIsError(true);
             return;
         }
         changeHero(heroId);
-    }, [])
+    }, [heroId])
 
     return (
         <main>
